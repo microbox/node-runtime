@@ -7,11 +7,13 @@ ENV NODE_VERSION=$NODE_VERSION
 RUN apk add --no-cache --update unzip tzdata libc6-compat && \
     rm -rf /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg
 
-ENV HOME=/root
-WORKDIR /root
+RUN adduser -u 1000 -g node -h /home/node -s /bin/sh -D node
 
-COPY config /root
-ONBUILD COPY dist.zip /root/
-CMD /root/bootstrap.sh
+ENV HOME=/home/node
+WORKDIR /home/node
+
+COPY config /home/node
+ONBUILD COPY dist.zip /home/node/
+CMD /home/node/bootstrap.sh
 
 # EOF

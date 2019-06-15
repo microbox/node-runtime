@@ -28,4 +28,3 @@ else
   echo "> File bin/standalone not found. Failed to start app...exit"
   exit 1
 fi
-
